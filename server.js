@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+require('dotenv').config();
 const path= require('path');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -11,9 +12,23 @@ const userSocketMap = {};
 
 
 app.use(express.static('build'));
-app.use((res,req,next)=>{
-    res.sendFile(path.join(__dirname,'build','index.html'));
-})
+app.use((req, res, next) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+
+
+const cors = require('cors');
+
+app.use(
+    cors({
+        origin: ["https://collabitor.vercel.app"],
+        methods: ["GET", "POST"],
+        allowedHeaders: ["Content-Type"],
+    })
+);
+
+
 // Helper function to get all connected clients in a room
 function getAllConnectedClients(roomId) {
     return Array.from(io.sockets.adapter.rooms.get(roomId) || []).map((socketId) => {

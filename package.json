@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "codemirror": "^5.65.18",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "gsap": "^3.12.5",
     "lucide-react": "^0.456.0",
